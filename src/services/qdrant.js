@@ -10,7 +10,7 @@ let client;
 export async function initQdrant() {
     client = new QdrantClient({
     url: QDRANT_URL,
-    apiKey: process.env.QDRANT_API_KEY, 
+    apiKey: QDRANT_API_KEY, 
 });  
     
     try{

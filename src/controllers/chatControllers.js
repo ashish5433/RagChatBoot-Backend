@@ -1,7 +1,7 @@
 import { embedTexts } from "../services/embeddings.js"; 
 import { qdrantSearch } from "../services/qdrant.js";
 import { streamGemini } from "../services/gemini.js";
-import { getSessionHistory, pushSessionEntry, getFullSessionHistory } from "../services/sessionStore.js";
+import { getSessionHistory, pushSessionEntry } from "../services/sessionStore.js";
 
 
 export async function handleChat(req, res) {
