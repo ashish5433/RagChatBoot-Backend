@@ -5,10 +5,13 @@ dotenv.config();
 
 const QDRANT_URL = process.env.QDRANT_URL ;
 const collectionName = process.env.QDRANT_COLLECTION || "news";
-
+const QDRANT_API_KEY = process.env.QDRANT_API_KEY;
 let client;
 export async function initQdrant() {
-    client = new QdrantClient({url: QDRANT_URL});   
+    client = new QdrantClient({
+    url: QDRANT_URL,
+    apiKey: process.env.QDRANT_API_KEY, 
+});  
     
     try{
         await client.getCollection(collectionName);
