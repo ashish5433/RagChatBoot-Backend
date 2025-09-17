@@ -46,6 +46,39 @@ With this architecture, the backend powers a **news assistant** that:
 
 Other Libraries: {axios,cheerio,cors,dotenv,rss-parser,helmet,morgan,UUID}
 
+---
+
+## 📂 Folder Structure
+```
+Backend/
+├── node_modules/ # Dependencies
+├── src/
+│ ├── controllers/ # Controller logic for routes
+│ │ ├── chatControllers.js
+│ │ └── sessionControllers.js
+│ │
+│ ├── routes/ # Express route definitions
+│ │ ├── chat.js
+│ │ └── session.js
+│ │
+│ ├── services/ # Core service modules
+│ │ ├── embeddings.js # Jina embedding service wrapper
+│ │ ├── gemini.js # Gemini API wrapper
+│ │ ├── qdrant.js # Qdrant vector DB utilities
+│ │ └── sessionStore.js # Redis session handling
+│ │
+│ └── tools/ # Scripts & entry points
+│ ├── ingest-run.js # Script for RSS ingestion
+│ └── server.js # Express server entry
+│
+├── .env # Environment variables
+├── .env.example # Sample env config
+├── .gitignore
+├── package.json
+├── package-lock.json
+
+```
+---
 ## 🏗️ Architecture
 
 ```mermaid
@@ -130,36 +163,7 @@ Run these commands to start Qdrant and Redis locally:
 
 **Note** If you are not using docker make sure you have api URL for deployed qdrant and Redis and paste those values in .env 
 
-## 📂 Folder Structure
-```
-Backend/
-├── node_modules/ # Dependencies
-├── src/
-│ ├── controllers/ # Controller logic for routes
-│ │ ├── chatControllers.js
-│ │ └── sessionControllers.js
-│ │
-│ ├── routes/ # Express route definitions
-│ │ ├── chat.js
-│ │ └── session.js
-│ │
-│ ├── services/ # Core service modules
-│ │ ├── embeddings.js # Jina embedding service wrapper
-│ │ ├── gemini.js # Gemini API wrapper
-│ │ ├── qdrant.js # Qdrant vector DB utilities
-│ │ └── sessionStore.js # Redis session handling
-│ │
-│ └── tools/ # Scripts & entry points
-│ ├── ingest-run.js # Script for RSS ingestion
-│ └── server.js # Express server entry
-│
-├── .env # Environment variables
-├── .env.example # Sample env config
-├── .gitignore
-├── package.json
-├── package-lock.json
 
-```
 
 
 
