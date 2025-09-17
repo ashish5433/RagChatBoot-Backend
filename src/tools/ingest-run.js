@@ -49,7 +49,7 @@ async function ingest() {
   });
 
   const entries = [];
-
+  console.log("fetching rss feeds...");
   for (const feedUrl of RSS_FEEDS) {
     try {
       const feed = await parser.parseURL(feedUrl);
@@ -62,7 +62,7 @@ async function ingest() {
       console.warn("rss error", feedUrl, e.message);
     }
   }
-
+cons
   const docs = [];
   for (const it of entries) {
     const url = it.link || it.enclosure?.url;
