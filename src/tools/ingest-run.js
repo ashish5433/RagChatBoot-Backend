@@ -1,27 +1,19 @@
 import dotenv from "dotenv";
 import Parser from "rss-parser";
 import axios from "axios";
-import {load} from "cheerio";
+import { load } from "cheerio";
 import { v4 as uuidv4 } from "uuid";
 import { embedTexts } from "../services/embeddings.js";
 import { initQdrant, upsertPoints } from "../services/qdrant.js";
+import { RSS_FEEDS } from "../utils/rssFeed.js";
 
 dotenv.config();
-const RSS_FEEDS = [
-  
-  "http://feeds.bbci.co.uk/news/world/rss.xml",
-  "https://feeds.npr.org/1001/rss.xml"
-];
 
 const BROWSER_HEADER = {
   "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36",
 };
 
-function htmlToText(html) {
-  const $ = load(html);
-  $("script, style, noscript").remove();
-  return $("body").text().replace(/\s+/g, " ").trim();
-}
+
 
 function chunkText(text, maxWords = 400) {
   const words = text.split(/\s+/);
@@ -30,6 +22,12 @@ function chunkText(text, maxWords = 400) {
     chunks.push(words.slice(i, i + maxWords).join(" "));
   }
   return chunks;
+}
+
+function htmlToText(html) {
+  const $ = load(html);
+  $("script, style, noscript").remove();
+  return $("body").text().replace(/\s+/g, " ").trim();
 }
 
 async function fetchArticle(url) {
@@ -44,7 +42,7 @@ async function fetchArticle(url) {
 
 async function ingest() {
   await initQdrant();
-    const parser = new Parser({
+  const parser = new Parser({
     requestOptions: {
       headers: BROWSER_HEADER,
     },
@@ -82,12 +80,12 @@ async function ingest() {
     const batch = docs.slice(i, i + BATCH);
     const texts = batch.map(d => d.text);
     const vectors = await embedTexts(texts);
-    const points = batch.map((d, idx) => ({
+    const payload = batch.map((d, idx) => ({
       id: d.id,
       vector: vectors[idx],
       payload: { text: d.text, url: d.url, meta: d.meta }
     }));
-    await upsertPoints(points);
+    await upsertPoints(payload);
     // console.log(`upserted ${i + points.length}/${docs.length}`);
   }
 
@@ -95,6 +93,6 @@ async function ingest() {
 }
 
 ingest().catch(err => {
-     console.error("Fatal error in ingest:", err);
-     process.exit(1);
+  console.error("Fatal error in ingest:", err);
+  process.exit(1);
 });

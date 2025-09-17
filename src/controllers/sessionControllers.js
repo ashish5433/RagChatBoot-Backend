@@ -8,7 +8,7 @@ export async function getSessionHistory(req, res) {
             return res.status(400).json({ error: "sessionId is required" });
         }
         const history = await getFullSessionHistory(sessionId);
-        return res.json({ history });
+        return res.status(200).json({ history });
     } catch (error) {
         console.error("Error in getSessionHistory:", error);
         return res.status(500).json({ error: "Internal Server Error" });

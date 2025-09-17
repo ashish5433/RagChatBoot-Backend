@@ -37,7 +37,9 @@ export async function pushSessionEntry(sessionId, entry) {
     if (!client) await initRedis();
     const key = getSessionKey(sessionId);
     await client.rPush(key, JSON.stringify(entry));
-    await client.lTrim(key, -50, -1);
+    await client.lTrim(key, -100, -1);
+
+    await client.expire(key,  60 * 60);
 }
 
 export async function clearSessionHistory(sessionId) {
