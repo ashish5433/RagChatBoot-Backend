@@ -136,7 +136,7 @@ flowchart TB
 
 ## 📥 Clone and Install 
 
-- Clone the repo into your directory  
+- Clone the repo into your directory using git clone <repo_url>  
 - Install all the dependencies required using `npm install` or `yarn install`  
 - Create a `.env` file in the root folder (same level as `package.json`)  
   - Copy all variables from `.env.example`  
