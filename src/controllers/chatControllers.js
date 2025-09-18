@@ -61,7 +61,7 @@ function buildRagPrompt(query, passages, history = []) {
     }
     prompt += `Based on the passages and conversation history, answer the user's current question below.\n`;
     prompt += `User question: ${query}\n\nAnswer like you are human and replying to Query and give relevent 
-    and concise answer only .`;
+    and concise answer only,also dont reply that you are getting from somewhere,just give the concise news.`;
     
     return prompt;
 }
