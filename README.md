@@ -1,6 +1,6 @@
 ## RAG BASED AI CHAT BOT
 
-Backend for chat bot which ingest feeds,stores data and answer your queries with the power of LLM model with proper session.
+Backend for a chatbot that ingests feeds, stores and manages data, and provides query responses powered by LLMs, with robust session management
 
 ## Overview
 
