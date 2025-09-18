@@ -30,5 +30,5 @@ export async function* streamGemini(prompt) {
         }
     }
     console.error("Unexpected error in streamGemini");
-    return "Please Try Again Later.";
+    yield "Server Down: Please Try Again Later.";
 }
