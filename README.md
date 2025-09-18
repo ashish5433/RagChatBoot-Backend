@@ -165,7 +165,9 @@ Run these commands to start Qdrant and Redis locally:
 
 
 
+## TTL Configuration
 
+To configure TTL i have used clearSession which clears the data for a particular session if user is inactive for more than an hour.i have placed this clearSession inside the function storing the data in the cache so that the timer gets updated if user types any query.
 
 
 
