@@ -55,14 +55,14 @@ async function ingest() {
       const feed = await parser.parseURL(feedUrl);
       for (const item of feed.items) {
         entries.push(item);
-        if (entries.length >= 50) break;
+        if (entries.length >= 70) break;
       }
-      if (entries.length >= 50) break;
+      if (entries.length >= 70) break;
     } catch (e) {
       console.warn("rss error", feedUrl, e.message);
     }
   }
-cons
+
   const docs = [];
   for (const it of entries) {
     const url = it.link || it.enclosure?.url;

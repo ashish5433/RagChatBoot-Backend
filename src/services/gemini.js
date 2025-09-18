@@ -29,4 +29,6 @@ export async function* streamGemini(prompt) {
             await sleep(1000);
         }
     }
+    console.error("Unexpected error in streamGemini");
+    return "Please Try Again Later.";
 }
