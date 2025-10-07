@@ -24,11 +24,12 @@ export async function* streamGemini(prompt) {
         } catch (error) {
             console.error(`Attempt ${attempt} of ${maxRetries} failed:`, error);
             if (attempt === maxRetries) {
-                throw new Error("Failed to get response from Gemini after multiple retries.");
+                yield "Server Down: Please Try Again Later.";
+                return;
             }
             await sleep(1000);
         }
     }
     console.error("Unexpected error in streamGemini");
-    yield "Server Down: Please Try Again Later.";
+    
 }
