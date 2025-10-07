@@ -8,7 +8,7 @@ if (!GEMINI_API_KEY) {
 }
 
 const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
-const generativeModel = genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest" });
+const generativeModel = genAI.getGenerativeModel({ model: "gemini-pro" });
 
 const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
